@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { executeStoredProcedure, sql } = require('../config/db');
 
-// Crear nuevo pedido
 router.post('/', async (req, res) => {
     try {
         const { sucursalId, empleadoId, clienteId, promocionId, tipoPedido } = req.body;
@@ -22,7 +21,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Agregar producto al pedido
 router.post('/:id/productos', async (req, res) => {
     try {
         const { productoId, cantidad } = req.body;
@@ -37,7 +35,6 @@ router.post('/:id/productos', async (req, res) => {
     }
 });
 
-// Aplicar promocion al pedido
 router.post('/:id/promocion', async (req, res) => {
     try {
         const { promocionId } = req.body;
@@ -51,7 +48,6 @@ router.post('/:id/promocion', async (req, res) => {
     }
 });
 
-// Obtener pedido con detalle
 router.get('/:id', async (req, res) => {
     try {
         const result = await executeStoredProcedure('sp_ObtenerPedido', {
@@ -65,7 +61,6 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// Listar pedidos con filtros
 router.get('/', async (req, res) => {
     try {
         const result = await executeStoredProcedure('sp_ListarPedidos', {
@@ -80,7 +75,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Cambiar estatus del pedido
 router.patch('/:id/estatus', async (req, res) => {
     try {
         const { nuevoEstatus } = req.body;
@@ -94,7 +88,6 @@ router.patch('/:id/estatus', async (req, res) => {
     }
 });
 
-// Cancelar pedido
 router.patch('/:id/cancelar', async (req, res) => {
     try {
         await executeStoredProcedure('sp_CancelarPedido', {
@@ -106,7 +99,6 @@ router.patch('/:id/cancelar', async (req, res) => {
     }
 });
 
-// Cancelar pedidos pendientes vencidos (+24h)
 router.post('/cancelar-vencidos', async (req, res) => {
     try {
         const result = await executeStoredProcedure('sp_CancelarPedidosPendientesVencidos', {});
