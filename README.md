@@ -2,7 +2,7 @@
 
 Sistema de punto de venta web para la cadena de taquerias "El Sinaloense" con 4 sucursales en Sinaloa.
 
-## Stack Tecnologico
+## Stack 
 
 - **Frontend**: HTML / CSS / JavaScript vanilla
 - **Backend**: Node.js con Express
