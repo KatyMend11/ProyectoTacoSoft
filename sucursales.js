@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { executeStoredProcedure } = require('../config/db');
 
-// Listar sucursales
 router.get('/', async (req, res) => {
     try {
         const result = await executeStoredProcedure('sp_ListarSucursales', {
@@ -14,7 +13,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Obtener sucursal por ID
 router.get('/:id', async (req, res) => {
     try {
         const result = await executeStoredProcedure('sp_ObtenerSucursal', { Id: parseInt(req.params.id) });
@@ -24,7 +22,6 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// Nueva sucursal
 router.post('/', async (req, res) => {
     try {
         const { nombre, direccion, ciudad, telefono } = req.body;
@@ -37,7 +34,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Editar sucursal
 router.put('/:id', async (req, res) => {
     try {
         const { nombre, direccion, ciudad, telefono } = req.body;
@@ -51,7 +47,6 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// Baja logica
 router.delete('/:id', async (req, res) => {
     try {
         await executeStoredProcedure('sp_BajaSucursal', { Id: parseInt(req.params.id) });
