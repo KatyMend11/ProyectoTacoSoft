@@ -27,3 +27,14 @@ async function getPool() {
     }
     return pool;
 }
+
+async function executeStoredProcedure(spName, params) {
+    try {
+        const pool = await getPool();
+        const request = pool.request();
+
+        if (params) {
+            for (const [key, value] of Object.entries(params)) {
+                request.input(key, value);
+            }
+        }
