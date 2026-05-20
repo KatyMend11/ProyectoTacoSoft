@@ -38,3 +38,13 @@ async function executeStoredProcedure(spName, params) {
                 request.input(key, value);
             }
         }
+
+        const result = await request.execute(spName);
+        return result;
+    } catch (error) {
+        console.error(`Error executing ${spName}:`, error.message);
+        throw error;
+    }
+}
+
+module.exports = { getPool, executeStoredProcedure, sql };
