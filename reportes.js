@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { executeStoredProcedure } = require('../config/db');
 
-// Ventas por sucursal
 router.get('/ventas-sucursal', async (req, res) => {
     try {
         const result = await executeStoredProcedure('sp_ReporteVentasSucursal', {
@@ -16,7 +15,6 @@ router.get('/ventas-sucursal', async (req, res) => {
     }
 });
 
-// Productos mas vendidos
 router.get('/productos-vendidos', async (req, res) => {
     try {
         const result = await executeStoredProcedure('sp_ReporteProductosMasVendidos', {
@@ -31,7 +29,6 @@ router.get('/productos-vendidos', async (req, res) => {
     }
 });
 
-// Ventas por categoria
 router.get('/ventas-categoria', async (req, res) => {
     try {
         const result = await executeStoredProcedure('sp_ReporteVentasPorCategoria', {
@@ -45,7 +42,6 @@ router.get('/ventas-categoria', async (req, res) => {
     }
 });
 
-// Rendimiento de empleados
 router.get('/rendimiento-empleados', async (req, res) => {
     try {
         const result = await executeStoredProcedure('sp_ReporteRendimientoEmpleados', {
@@ -59,7 +55,6 @@ router.get('/rendimiento-empleados', async (req, res) => {
     }
 });
 
-// Comparativo mensual
 router.get('/comparativo-mensual', async (req, res) => {
     try {
         const result = await executeStoredProcedure('sp_ReporteComparativoMensual', {
@@ -71,7 +66,6 @@ router.get('/comparativo-mensual', async (req, res) => {
     }
 });
 
-// Productos sin movimiento
 router.get('/productos-sin-movimiento', async (req, res) => {
     try {
         const result = await executeStoredProcedure('sp_ReporteProductosSinMovimiento', {
