@@ -84,7 +84,6 @@ ALTER DATABASE [TacoSoft] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_
 GO
 USE [TacoSoft]
 GO
-/****** Object:  Table [dbo].[Categorias]    Script Date: 18/05/2026 12:48:06 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
