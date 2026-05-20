@@ -18,7 +18,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// API Routes
 app.use('/api/sucursales', sucursalesRouter);
 app.use('/api/categorias', categoriasRouter);
 app.use('/api/productos', productosRouter);
@@ -28,7 +27,6 @@ app.use('/api/promociones', promocionesRouter);
 app.use('/api/pedidos', pedidosRouter);
 app.use('/api/reportes', reportesRouter);
 
-// SPA fallback
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
