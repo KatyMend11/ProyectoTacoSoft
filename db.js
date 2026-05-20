@@ -18,3 +18,12 @@ const config = {
         idleTimeoutMillis: 30000
     }
 };
+
+let pool;
+
+async function getPool() {
+    if (!pool) {
+        pool = await sql.connect(config);
+    }
+    return pool;
+}
