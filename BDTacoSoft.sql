@@ -728,7 +728,7 @@ BEGIN
             VALUES (@PedidoID, @ProductoID, @Cantidad, @PrecioActual);
         END
 
-        -- Recalcular Subtotal, IVA (16%) y Total
+        -- Recalcular Subtotal, IVA (16%) 
         DECLARE @NuevoSubtotal DECIMAL(10,2);
 
         SELECT @NuevoSubtotal = ISNULL(SUM(Subtotal), 0)
