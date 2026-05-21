@@ -99,7 +99,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Clientes]    Script Date: 18/05/2026 12:48:06 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -118,7 +117,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DetallePedido]    Script Date: 18/05/2026 12:48:06 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -136,7 +134,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Empleados]    Script Date: 18/05/2026 12:48:06 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -156,7 +153,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Pedidos]    Script Date: 18/05/2026 12:48:06 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -179,7 +175,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Productos]    Script Date: 18/05/2026 12:48:06 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -199,7 +194,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Promociones]    Script Date: 18/05/2026 12:48:06 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -218,7 +212,6 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PromocionProducto]    Script Date: 18/05/2026 12:48:06 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -233,7 +226,6 @@ CREATE TABLE [dbo].[PromocionProducto](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Sucursales]    Script Date: 18/05/2026 12:48:06 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -482,13 +474,11 @@ SET IDENTITY_INSERT [dbo].[Sucursales] OFF
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ__Categori__75E3EFCFC4AB2DBA]    Script Date: 18/05/2026 12:48:06 p. m. ******/
 ALTER TABLE [dbo].[Categorias] ADD UNIQUE NONCLUSTERED 
 (
 	[Nombre] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [UX_Empleados_GerentePorSucursal]    Script Date: 18/05/2026 12:48:06 p. m. ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UX_Empleados_GerentePorSucursal] ON [dbo].[Empleados]
 (
 	[SucursalID] ASC
@@ -496,7 +486,6 @@ CREATE UNIQUE NONCLUSTERED INDEX [UX_Empleados_GerentePorSucursal] ON [dbo].[Emp
 WHERE ([Puesto]='gerente' AND [Estatus]='activo')
 WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Pedidos_EmpleadoID]    Script Date: 18/05/2026 12:48:06 p. m. ******/
 CREATE NONCLUSTERED INDEX [IX_Pedidos_EmpleadoID] ON [dbo].[Pedidos]
 (
 	[EmpleadoID] ASC
@@ -504,19 +493,16 @@ CREATE NONCLUSTERED INDEX [IX_Pedidos_EmpleadoID] ON [dbo].[Pedidos]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_Pedidos_Estatus]    Script Date: 18/05/2026 12:48:06 p. m. ******/
 CREATE NONCLUSTERED INDEX [IX_Pedidos_Estatus] ON [dbo].[Pedidos]
 (
 	[Estatus] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Pedidos_FechaHora]    Script Date: 18/05/2026 12:48:06 p. m. ******/
 CREATE NONCLUSTERED INDEX [IX_Pedidos_FechaHora] ON [dbo].[Pedidos]
 (
 	[FechaHora] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Pedidos_SucursalID]    Script Date: 18/05/2026 12:48:06 p. m. ******/
 CREATE NONCLUSTERED INDEX [IX_Pedidos_SucursalID] ON [dbo].[Pedidos]
 (
 	[SucursalID] ASC
@@ -664,15 +650,11 @@ ALTER TABLE [dbo].[Sucursales]  WITH CHECK ADD  CONSTRAINT [CK_Sucursales_Estatu
 GO
 ALTER TABLE [dbo].[Sucursales] CHECK CONSTRAINT [CK_Sucursales_Estatus]
 GO
-/****** Object:  StoredProcedure [dbo].[sp_AgregarProductoAlPedido]    Script Date: 18/05/2026 12:48:07 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
--- ============================================================
--- PASO 6: Actualizar sp_AgregarProductoAlPedido
--- ============================================================
 CREATE   PROCEDURE [dbo].[sp_AgregarProductoAlPedido]
     @PedidoID   INT,
     @ProductoID INT,
@@ -727,7 +709,6 @@ BEGIN
             VALUES (@PedidoID, @ProductoID, @Cantidad, @PrecioActual);
         END
 
-        -- Recalcular Subtotal, IVA (16%) y el Total
         DECLARE @NuevoSubtotal DECIMAL(10,2);
 
         SELECT @NuevoSubtotal = ISNULL(SUM(Subtotal), 0)
@@ -754,15 +735,11 @@ BEGIN
     END CATCH
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_AplicarPromocion]    Script Date: 18/05/2026 12:48:07 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
--- ============================================================
--- PASO 7: Actualizar sp_AplicarPromocion
--- ============================================================
 CREATE   PROCEDURE [dbo].[sp_AplicarPromocion]
     @PedidoID    INT,
     @PromocionID INT,
@@ -820,7 +797,6 @@ BEGIN
             RETURN;
         END
 
-        -- Aplicar descuento en las lineas que aplican
         UPDATE dp
         SET    dp.PrecioUnitario = dp.PrecioUnitario * (1 - @Porcentaje / 100.0)
         FROM   DetallePedido     dp
@@ -828,7 +804,6 @@ BEGIN
         WHERE  dp.PedidoID    = @PedidoID
           AND  pp.PromocionID = @PromocionID;
 
-        -- Recalcular Subtotal, IVA y Total
         DECLARE @NuevoSubtotal DECIMAL(10,2);
 
         SELECT @NuevoSubtotal = ISNULL(SUM(Subtotal), 0)
@@ -860,25 +835,11 @@ BEGIN
     END CATCH
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_CambiarEstatusPedido]    Script Date: 18/05/2026 12:48:07 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
--- ============================================================
--- SP 1: sp_CambiarEstatusPedido
--- Avanza el estatus de un pedido siguiendo el flujo lineal:
---   pendiente -> preparando -> listo -> entregado
---
--- Reglas:
---   - Solo se puede avanzar, nunca retroceder
---   - Un pedido cancelado NO puede cambiar de estatus
---   - El flujo es estrictamente secuencial (no saltar pasos)
---
--- Parametros:
---   @PedidoID INT
--- ============================================================
 CREATE   PROCEDURE [dbo].[sp_CambiarEstatusPedido]
     @PedidoID INT
 AS
@@ -894,14 +855,12 @@ BEGIN
         FROM   Pedidos
         WHERE  PedidoID = @PedidoID;
 
-        -- Validar que el pedido exista
         IF @EstatusActual IS NULL
         BEGIN
             RAISERROR('El pedido no existe.', 16, 1);
             RETURN;
         END
 
-        -- Validar que no este cancelado ni ya entregado
         IF @EstatusActual = 'cancelado'
         BEGIN
             RAISERROR('Un pedido cancelado no puede cambiar de estatus.', 16, 1);
@@ -914,7 +873,6 @@ BEGIN
             RETURN;
         END
 
-        -- Determinar el siguiente estatus en el flujo lineal
         DECLARE @NuevoEstatus VARCHAR(15);
 
         SET @NuevoEstatus = CASE @EstatusActual
@@ -927,7 +885,6 @@ BEGIN
         SET    Estatus = @NuevoEstatus
         WHERE  PedidoID = @PedidoID;
 
-        -- Informar el cambio realizado
         SELECT
             @PedidoID     AS PedidoID,
             @EstatusActual AS EstatusAnterior,
@@ -946,23 +903,12 @@ BEGIN
     END CATCH
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_CancelarPedido]    Script Date: 18/05/2026 12:48:07 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
 
--- ============================================================
--- SP 2: sp_CancelarPedido
--- Cancela un pedido. Solo aplica si el pedido esta en
--- 'pendiente' o 'preparando'. Un pedido cancelado no se
--- puede reactivar (se valida en sp_CambiarEstatusPedido).
---
--- Parametros:
---   @PedidoID INT
---   @Motivo   VARCHAR(255)  (opcional, para registro)
--- ============================================================
 CREATE   PROCEDURE [dbo].[sp_CancelarPedido]
     @PedidoID INT,
     @Motivo   VARCHAR(255) = NULL
@@ -979,14 +925,12 @@ BEGIN
         FROM   Pedidos
         WHERE  PedidoID = @PedidoID;
 
-        -- Validar que el pedido exista
         IF @EstatusActual IS NULL
         BEGIN
             RAISERROR('El pedido no existe.', 16, 1);
             RETURN;
         END
 
-        -- Solo se puede cancelar si esta en 'pendiente' o 'preparando'
         IF @EstatusActual NOT IN ('pendiente', 'preparando')
         BEGIN
             RAISERROR('Solo se pueden cancelar pedidos en estatus pendiente o preparando. Estatus actual: %s', 16, 1, @EstatusActual);
@@ -997,7 +941,6 @@ BEGIN
         SET    Estatus = 'cancelado'
         WHERE  PedidoID = @PedidoID;
 
-        -- Resultado informativo
         SELECT
             @PedidoID      AS PedidoID,
             @EstatusActual AS EstatusAnterior,
@@ -1017,21 +960,11 @@ BEGIN
     END CATCH
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_CancelarPedidosVencidos]    Script Date: 18/05/2026 12:48:07 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-
--- ============================================================
--- SP 3: sp_CancelarPedidosVencidos
--- Cancela automaticamente todos los pedidos que llevan mas
--- de 24 horas en estatus 'pendiente'.
--- Debe ejecutarse periodicamente (ej. SQL Server Agent Job).
---
--- Devuelve cuantos pedidos fueron cancelados.
--- ============================================================
 CREATE   PROCEDURE [dbo].[sp_CancelarPedidosVencidos]
 AS
 BEGIN
@@ -1040,7 +973,6 @@ BEGIN
     BEGIN TRY
         BEGIN TRANSACTION;
 
-        -- Identificar pedidos vencidos (pendiente por mas de 24h)
         DECLARE @PedidosVencidos TABLE (PedidoID INT);
 
         INSERT INTO @PedidosVencidos (PedidoID)
@@ -1049,19 +981,16 @@ BEGIN
         WHERE  Estatus   = 'pendiente'
           AND  FechaHora < DATEADD(HOUR, -24, GETDATE());
 
-        -- Cancelarlos en bloque
         UPDATE Pedidos
         SET    Estatus = 'cancelado'
         WHERE  PedidoID IN (SELECT PedidoID FROM @PedidosVencidos);
 
         DECLARE @Cancelados INT = @@ROWCOUNT;
 
-        -- Resultado informativo
         SELECT
             @Cancelados                    AS PedidosCancelados,
             GETDATE()                      AS FechaEjecucion;
 
-        -- Opcional: ver cuales fueron cancelados
         IF @Cancelados > 0
         BEGIN
             SELECT
@@ -1087,22 +1016,12 @@ BEGIN
     END CATCH
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ConfirmarPedido]    Script Date: 18/05/2026 12:48:07 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
 
--- ============================================================
--- SP 4: sp_ConfirmarPedido
--- Cambia el estatus del pedido de 'pendiente' a 'preparando',
--- marcando que fue aceptado en cocina.
--- Valida que el pedido tenga al menos un producto.
---
--- Parametros:
---   @PedidoID INT
--- ============================================================
 CREATE   PROCEDURE [dbo].[sp_ConfirmarPedido]
     @PedidoID INT
 AS
@@ -1112,7 +1031,6 @@ BEGIN
     BEGIN TRY
         BEGIN TRANSACTION;
 
-        -- Validar que el pedido exista y este en 'pendiente'
         IF NOT EXISTS (
             SELECT 1 FROM Pedidos
             WHERE PedidoID = @PedidoID AND Estatus = 'pendiente'
@@ -1122,7 +1040,6 @@ BEGIN
             RETURN;
         END
 
-        -- Validar que tenga al menos un producto
         IF NOT EXISTS (
             SELECT 1 FROM DetallePedido
             WHERE PedidoID = @PedidoID
@@ -1132,7 +1049,6 @@ BEGIN
             RETURN;
         END
 
-        -- Avanzar al siguiente estatus en el flujo lineal
         UPDATE Pedidos
         SET    Estatus = 'preparando'
         WHERE  PedidoID = @PedidoID;
@@ -1150,15 +1066,11 @@ BEGIN
     END CATCH
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_DetallePedido]    Script Date: 18/05/2026 12:48:07 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
--- ============================================================
--- PASO 8: Actualizar sp_DetallePedido
--- ============================================================
 CREATE   PROCEDURE [dbo].[sp_DetallePedido]
     @PedidoID INT
 AS
@@ -1207,25 +1119,12 @@ BEGIN
     ORDER BY dp.DetalleID;
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_NuevoPedido]    Script Date: 18/05/2026 12:48:07 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
--- ============================================================
--- SP 1: sp_NuevoPedido
--- Crea un pedido nuevo en estatus 'pendiente'.
--- Valida que el empleado exista, este activo y pertenezca
--- a la sucursal indicada.
---
--- Parametros:
---   @SucursalID  INT
---   @EmpleadoID  INT
---   @ClienteID   INT  (NULL = publico general)
---   @TipoPedido  VARCHAR(15) -> 'en local' | 'para llevar' | 'a domicilio'
---   @NuevoPedidoID INT OUTPUT  -> devuelve el ID generado
--- ============================================================
+
 CREATE   PROCEDURE [dbo].[sp_NuevoPedido]
     @SucursalID    INT,
     @EmpleadoID    INT,
@@ -1239,7 +1138,6 @@ BEGIN
     BEGIN TRY
         BEGIN TRANSACTION;
 
-        -- Validar que la sucursal exista y este activa
         IF NOT EXISTS (
             SELECT 1 FROM Sucursales
             WHERE SucursalID = @SucursalID AND Estatus = 'activa'
@@ -1249,7 +1147,6 @@ BEGIN
             RETURN;
         END
 
-        -- Validar que el empleado exista, este activo y pertenezca a la sucursal
         IF NOT EXISTS (
             SELECT 1 FROM Empleados
             WHERE EmpleadoID = @EmpleadoID
@@ -1261,14 +1158,12 @@ BEGIN
             RETURN;
         END
 
-        -- Validar que el tipo de pedido sea valido
         IF @TipoPedido NOT IN ('en local', 'para llevar', 'a domicilio')
         BEGIN
             RAISERROR('Tipo de pedido invalido. Use: en local, para llevar o a domicilio.', 16, 1);
             RETURN;
         END
 
-        -- Validar cliente si se proporciono (no obligatorio)
         IF @ClienteID IS NOT NULL AND NOT EXISTS (
             SELECT 1 FROM Clientes
             WHERE ClienteID = @ClienteID AND Activo = 1
@@ -1278,7 +1173,6 @@ BEGIN
             RETURN;
         END
 
-        -- Insertar el pedido con Total = 0 (se recalcula al agregar productos)
         INSERT INTO Pedidos (SucursalID, EmpleadoID, ClienteID, FechaHora, TipoPedido, Estatus, Total)
         VALUES (@SucursalID, @EmpleadoID, @ClienteID, GETDATE(), @TipoPedido, 'pendiente', 0);
 
@@ -1297,26 +1191,11 @@ BEGIN
     END CATCH
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ReporteProductosMasVendidos]    Script Date: 18/05/2026 12:48:07 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-
--- ============================================================
--- SP 2: sp_ReporteProductosMasVendidos
--- Top 10 productos mas vendidos por cantidad total,
--- con su categoria y el total generado en pesos.
--- Solo pedidos entregados.
---
--- Temas SQL: GROUP BY + ORDER BY + TOP
---
--- Parametros:
---   @FechaInicio DATE
---   @FechaFin    DATE
---   @SucursalID  INT  (0 = todas)
--- ============================================================
 CREATE   PROCEDURE [dbo].[sp_ReporteProductosMasVendidos]
     @FechaInicio DATE,
     @FechaFin    DATE,
@@ -1350,26 +1229,12 @@ BEGIN
     ORDER BY   UnidadesVendidas DESC, TotalGenerado DESC;
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ReporteProductosSinMovimiento]    Script Date: 18/05/2026 12:48:07 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
 
--- ============================================================
--- SP 6: sp_ReporteProductosSinMovimiento
--- Productos que NO han sido vendidos en el periodo indicado.
--- Usa LEFT JOIN + IS NULL para detectar ausencia de ventas.
--- Incluye productos activos e inactivos para auditoria.
---
--- Temas SQL: NOT EXISTS / LEFT JOIN + IS NULL
---
--- Parametros:
---   @FechaInicio DATE
---   @FechaFin    DATE
---   @SucursalID  INT  (0 = todas)
--- ============================================================
 CREATE   PROCEDURE [dbo].[sp_ReporteProductosSinMovimiento]
     @FechaInicio DATE,
     @FechaFin    DATE,
@@ -1384,7 +1249,6 @@ BEGIN
         RETURN;
     END
 
-    -- Tecnica 1: LEFT JOIN + IS NULL  (la que pide el documento)
     SELECT
         pr.ProductoID,
         cat.Nombre          AS Categoria,
@@ -1392,7 +1256,6 @@ BEGIN
         pr.PrecioVenta,
         pr.CostoPreparacion,
         pr.Estatus,
-        -- Subconsulta escalar: ultima vez que se vendio (fuera del periodo)
         (
             SELECT MAX(CAST(p2.FechaHora AS DATE))
             FROM   DetallePedido dp2
@@ -1402,38 +1265,21 @@ BEGIN
         )                   AS UltimaVentaHistorica
     FROM       Productos     pr
     JOIN       Categorias    cat ON pr.CategoriaID = cat.CategoriaID
-    -- LEFT JOIN: si no hay detalle en el periodo, las columnas de dp y p seran NULL
     LEFT JOIN  DetallePedido dp  ON  dp.ProductoID = pr.ProductoID
     LEFT JOIN  Pedidos       p   ON  dp.PedidoID   = p.PedidoID
                                  AND p.Estatus     = 'entregado'
                                  AND CAST(p.FechaHora AS DATE) BETWEEN @FechaInicio AND @FechaFin
                                  AND (@SucursalID = 0 OR p.SucursalID = @SucursalID)
-    -- Filtro IS NULL: solo los que NO tuvieron ventas en el periodo
     WHERE      p.PedidoID IS NULL
     ORDER BY   cat.Nombre, pr.Nombre;
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ReporteRendimientoEmpleados]    Script Date: 18/05/2026 12:48:07 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
 
--- ============================================================
--- SP 4: sp_ReporteRendimientoEmpleados
--- Pedidos atendidos, total vendido y ticket promedio
--- por empleado. Solo muestra empleados con mas de 5 pedidos
--- (HAVING). Filtra solo cajeros (los que toman pedidos).
---
--- Temas SQL: GROUP BY + HAVING + JOIN
---
--- Parametros:
---   @FechaInicio     DATE
---   @FechaFin        DATE
---   @SucursalID      INT  (0 = todas)
---   @MinimoPedidos   INT  (default 5, segun el documento)
--- ============================================================
 CREATE   PROCEDURE [dbo].[sp_ReporteRendimientoEmpleados]
     @FechaInicio   DATE,
     @FechaFin      DATE,
@@ -1457,7 +1303,6 @@ BEGIN
         COUNT(p.PedidoID)                   AS TotalPedidos,
         SUM(p.Total)                        AS TotalVendido,
         CAST(AVG(p.Total) AS DECIMAL(10,2)) AS TicketPromedio,
-        -- Subconsulta escalar: pedido de mayor valor que atendio
         (
             SELECT MAX(p2.Total)
             FROM   Pedidos p2
@@ -1477,26 +1322,12 @@ BEGIN
     ORDER BY   TotalVendido DESC;
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ReporteVentasCategoria]    Script Date: 18/05/2026 12:48:07 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
 
--- ============================================================
--- SP 3: sp_ReporteVentasCategoria
--- Total vendido agrupado por categoria del menu.
--- Incluye cantidad de productos distintos vendidos y
--- cuantos pedidos contienen productos de esa categoria.
---
--- Temas SQL: GROUP BY + JOIN
---
--- Parametros:
---   @FechaInicio DATE
---   @FechaFin    DATE
---   @SucursalID  INT  (0 = todas)
--- ============================================================
 CREATE   PROCEDURE [dbo].[sp_ReporteVentasCategoria]
     @FechaInicio DATE,
     @FechaFin    DATE,
@@ -1532,15 +1363,11 @@ BEGIN
     ORDER BY   TotalVentas DESC;
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ReporteVentasSucursal]    Script Date: 18/05/2026 12:48:07 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
--- ============================================================
--- PASO 9: Actualizar sp_ReporteVentasSucursal
--- ============================================================
 CREATE   PROCEDURE [dbo].[sp_ReporteVentasSucursal]
     @FechaInicio DATE,
     @FechaFin    DATE,
@@ -1577,24 +1404,11 @@ BEGIN
     ORDER BY TotalVentasConIVA DESC;
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_VerPedidos]    Script Date: 18/05/2026 12:48:07 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-
--- ============================================================
--- SP 4: sp_VerPedidos
--- Lista pedidos filtrados por sucursal y/o estatus.
--- Si @SucursalID = 0 devuelve todas las sucursales.
--- Si @Estatus = '' devuelve todos los estatus.
--- Incluye nombre de empleado, cliente y sucursal via JOINs.
---
--- Parametros:
---   @SucursalID INT         (0 = todas)
---   @Estatus    VARCHAR(15) ('' = todos)
--- ============================================================
 CREATE   PROCEDURE [dbo].[sp_VerPedidos]
     @SucursalID INT          = 0,
     @Estatus    VARCHAR(15)  = ''
