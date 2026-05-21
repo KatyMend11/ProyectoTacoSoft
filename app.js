@@ -268,7 +268,7 @@ async function bajaSucursal(id) {
     showToast('Sucursal dada de baja');
 }
 
-// ==================== CATEGORIAS ====================
+
 async function loadCategorias() {
     const busqueda = document.getElementById('searchCategoria')?.value || '';
     const data = await apiGet(`/categorias?busqueda=${busqueda}`);
@@ -371,7 +371,7 @@ async function bajaProducto(id) {
     showToast('Producto dado de baja');
 }
 
-// ==================== EMPLEADOS ====================
+
 async function loadEmpleados() {
     const busqueda = document.getElementById('searchEmpleado')?.value || '';
     const sucursalId = document.getElementById('filterSucursalEmpleado')?.value || '';
