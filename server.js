@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 
+const authRouter = require('./routes/auth');
 const sucursalesRouter = require('./routes/sucursales');
 const categoriasRouter = require('./routes/categorias');
 const productosRouter = require('./routes/productos');
@@ -18,6 +19,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
+app.use('/api/auth', authRouter);
 app.use('/api/sucursales', sucursalesRouter);
 app.use('/api/categorias', categoriasRouter);
 app.use('/api/productos', productosRouter);
