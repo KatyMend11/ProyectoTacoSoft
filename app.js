@@ -1,4 +1,4 @@
-// ==================== STATE ====================
+
 let cart = [];
 let allSucursales = [];
 let allCategorias = [];
