@@ -1,29 +1,19 @@
--- =============================================
--- El Sinaloense POS - Database Schema
--- =============================================
-
 CREATE DATABASE ElSinaloensePOS;
 GO
 
 USE ElSinaloensePOS;
 GO
 
--- =============================================
--- 1. SUCURSALES
--- =============================================
 CREATE TABLE Sucursales (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     Nombre NVARCHAR(100) NOT NULL,
     Direccion NVARCHAR(200) NOT NULL,
     Ciudad NVARCHAR(50) NOT NULL,
     Telefono NVARCHAR(20) NOT NULL,
-    Estatus BIT NOT NULL DEFAULT 1 -- 1=Activa, 0=Cerrada
+    Estatus BIT NOT NULL DEFAULT 1 
 );
 GO
 
--- =============================================
--- 2. CATEGORIAS
--- =============================================
 CREATE TABLE Categorias (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     Nombre NVARCHAR(50) NOT NULL,
@@ -31,9 +21,6 @@ CREATE TABLE Categorias (
 );
 GO
 
--- =============================================
--- 3. PRODUCTOS
--- =============================================
 CREATE TABLE Productos (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     Nombre NVARCHAR(100) NOT NULL,
@@ -41,13 +28,10 @@ CREATE TABLE Productos (
     CategoriaId INT NOT NULL FOREIGN KEY REFERENCES Categorias(Id),
     Precio DECIMAL(10,2) NOT NULL,
     Costo DECIMAL(10,2) NOT NULL,
-    Estatus BIT NOT NULL DEFAULT 1 -- 1=Disponible, 0=No disponible
+    Estatus BIT NOT NULL DEFAULT 1 
 );
 GO
 
--- =============================================
--- 4. EMPLEADOS
--- =============================================
 CREATE TABLE Empleados (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     Nombre NVARCHAR(100) NOT NULL,
@@ -56,13 +40,10 @@ CREATE TABLE Empleados (
     SucursalId INT NOT NULL FOREIGN KEY REFERENCES Sucursales(Id),
     SalarioQuincenal DECIMAL(10,2) NOT NULL,
     FechaIngreso DATE NOT NULL DEFAULT GETDATE(),
-    Estatus BIT NOT NULL DEFAULT 1 -- 1=Activo, 0=Inactivo
+    Estatus BIT NOT NULL DEFAULT 1 
 );
 GO
 
--- =============================================
--- 5. CLIENTES
--- =============================================
 CREATE TABLE Clientes (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     Nombre NVARCHAR(100) NOT NULL,
@@ -75,9 +56,6 @@ CREATE TABLE Clientes (
 );
 GO
 
--- =============================================
--- 6. PEDIDOS
--- =============================================
 CREATE TABLE Pedidos (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     SucursalId INT NOT NULL FOREIGN KEY REFERENCES Sucursales(Id),
@@ -91,9 +69,6 @@ CREATE TABLE Pedidos (
 );
 GO
 
--- =============================================
--- 7. DETALLE_PEDIDO
--- =============================================
 CREATE TABLE DetallePedido (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     PedidoId INT NOT NULL FOREIGN KEY REFERENCES Pedidos(Id),
@@ -104,9 +79,6 @@ CREATE TABLE DetallePedido (
 );
 GO
 
--- =============================================
--- 8. PROMOCIONES
--- =============================================
 CREATE TABLE Promociones (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     Nombre NVARCHAR(100) NOT NULL,
@@ -119,9 +91,6 @@ CREATE TABLE Promociones (
 );
 GO
 
--- =============================================
--- 9. PROMOCION_PRODUCTOS (tabla puente)
--- =============================================
 CREATE TABLE PromocionProductos (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     PromocionId INT NOT NULL FOREIGN KEY REFERENCES Promociones(Id),
@@ -130,7 +99,7 @@ CREATE TABLE PromocionProductos (
 );
 GO
 
--- Indexes for performance
+
 CREATE INDEX IX_Pedidos_Fecha ON Pedidos(FechaHora);
 CREATE INDEX IX_Pedidos_Estatus ON Pedidos(Estatus);
 CREATE INDEX IX_Pedidos_Sucursal ON Pedidos(SucursalId);
