@@ -1,12 +1,5 @@
--- =============================================
--- El Sinaloense POS - Stored Procedures
--- =============================================
 USE ElSinaloensePOS;
 GO
-
--- =============================================
--- SUCURSALES
--- =============================================
 
 CREATE OR ALTER PROCEDURE sp_ListarSucursales
     @Busqueda NVARCHAR(100) = NULL
@@ -94,10 +87,6 @@ BEGIN
 END
 GO
 
--- =============================================
--- CATEGORIAS
--- =============================================
-
 CREATE OR ALTER PROCEDURE sp_ListarCategorias
     @Busqueda NVARCHAR(100) = NULL
 AS
@@ -167,10 +156,6 @@ BEGIN
     END CATCH
 END
 GO
-
--- =============================================
--- PRODUCTOS
--- =============================================
 
 CREATE OR ALTER PROCEDURE sp_ListarProductos
     @Busqueda NVARCHAR(100) = NULL,
@@ -267,10 +252,6 @@ BEGIN
     END CATCH
 END
 GO
-
--- =============================================
--- EMPLEADOS
--- =============================================
 
 CREATE OR ALTER PROCEDURE sp_ListarEmpleados
     @Busqueda NVARCHAR(100) = NULL,
@@ -386,9 +367,6 @@ BEGIN
 END
 GO
 
--- =============================================
--- CLIENTES
--- =============================================
 
 CREATE OR ALTER PROCEDURE sp_ListarClientes
     @Busqueda NVARCHAR(100) = NULL,
@@ -471,10 +449,6 @@ BEGIN
     END CATCH
 END
 GO
-
--- =============================================
--- PROMOCIONES
--- =============================================
 
 CREATE OR ALTER PROCEDURE sp_ListarPromociones
     @Busqueda NVARCHAR(100) = NULL
@@ -655,10 +629,6 @@ BEGIN
 END
 GO
 
--- =============================================
--- PUNTO DE VENTA - PEDIDOS
--- =============================================
-
 CREATE OR ALTER PROCEDURE sp_NuevoPedido
     @SucursalId INT,
     @EmpleadoId INT,
@@ -795,10 +765,6 @@ BEGIN
 END
 GO
 
--- =============================================
--- GESTION DE PEDIDOS
--- =============================================
-
 CREATE OR ALTER PROCEDURE sp_ListarPedidos
     @Estatus NVARCHAR(20) = NULL,
     @SucursalId INT = NULL,
@@ -924,10 +890,6 @@ BEGIN
     END CATCH
 END
 GO
-
--- =============================================
--- REPORTES / DASHBOARD
--- =============================================
 
 CREATE OR ALTER PROCEDURE sp_ReporteVentasSucursal
     @FechaInicio DATE = NULL,
