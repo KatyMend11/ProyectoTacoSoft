@@ -25,7 +25,6 @@ body {
     min-height: 100vh;
 }
 
-/* Header */
 .header {
     background: linear-gradient(135deg, var(--primary), var(--accent));
     color: var(--white);
@@ -64,7 +63,7 @@ body {
     border-color: var(--danger);
 }
 
-/* Navigation */
+
 .nav {
     display: flex;
     gap: 0.5rem;
@@ -87,7 +86,7 @@ body {
     color: var(--dark);
 }
 
-/* Catalog sub-navigation */
+
 #catalogos .nav {
     background: var(--dark);
     padding: 0.5rem;
@@ -112,13 +111,13 @@ body {
     color: var(--white);
 }
 
-/* Main Content */
+
 .main { padding: 1.5rem; max-width: 1400px; margin: 0 auto; }
 
 .section { display: none; }
 .section.active { display: block; }
 
-/* Cards */
+
 .card {
     background: var(--white);
     border-radius: var(--radius);
@@ -163,7 +162,7 @@ body {
 .btn-secondary { background: var(--gray); color: var(--white); }
 .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
 
-/* Tables */
+
 .table-container { overflow-x: auto; }
 
 table {
@@ -200,7 +199,7 @@ tr:hover { background: #f8f9fa; }
 .badge-info { background: #d1ecf1; color: #0c5460; }
 .badge-secondary { background: #e2e3e5; color: #383d41; }
 
-/* Forms */
+
 .form-group { margin-bottom: 1rem; }
 
 .form-group label {
@@ -231,7 +230,7 @@ tr:hover { background: #f8f9fa; }
     gap: 1rem;
 }
 
-/* Search Bar */
+
 .search-bar {
     display: flex;
     gap: 1rem;
@@ -244,7 +243,7 @@ tr:hover { background: #f8f9fa; }
     min-width: 200px;
 }
 
-/* Modal */
+
 .modal-overlay {
     display: none;
     position: fixed;
@@ -294,7 +293,7 @@ tr:hover { background: #f8f9fa; }
     border-top: 1px solid var(--light);
 }
 
-/* POS Specific */
+
 .pos-container {
     display: grid;
     grid-template-columns: 1fr 380px;
@@ -427,7 +426,7 @@ tr:hover { background: #f8f9fa; }
 
 .cart-options { display: flex; flex-direction: column; gap: 0.5rem; }
 
-/* Dashboard */
+
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -486,7 +485,7 @@ tr:hover { background: #f8f9fa; }
     color: var(--dark);
 }
 
-/* Order Management */
+
 .order-filters {
     display: flex;
     gap: 0.5rem;
@@ -509,7 +508,7 @@ tr:hover { background: #f8f9fa; }
     color: var(--white);
 }
 
-/* Toast Notifications */
+
 .toast-container {
     position: fixed;
     top: 80px;
@@ -535,7 +534,7 @@ tr:hover { background: #f8f9fa; }
     to { transform: translateX(0); opacity: 1; }
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
     .header { flex-direction: column; gap: 1rem; }
     .nav { justify-content: center; }
@@ -544,7 +543,7 @@ tr:hover { background: #f8f9fa; }
     .dashboard-grid { grid-template-columns: 1fr; }
 }
 
-/* Loading spinner */
+
 .loading {
     display: inline-block;
     width: 20px;
