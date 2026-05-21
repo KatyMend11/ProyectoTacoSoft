@@ -1,1 +1,385 @@
-index jasjas
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Sinaloense - Punto de Venta</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="header">
+        <h1>El Sinaloense <span>POS</span></h1>
+        <nav class="nav">
+            <button class="nav-btn active" data-section="pos">Punto de Venta</button>
+            <button class="nav-btn" data-section="pedidos">Pedidos</button>
+            <button class="nav-btn" data-section="catalogos">Catalogos</button>
+            <button class="nav-btn" data-section="dashboard">Dashboard</button>
+        </nav>
+    </header>
+
+    <main class="main">
+        <!-- TOAST CONTAINER -->
+        <div class="toast-container" id="toastContainer"></div>
+
+        <!-- ==================== PUNTO DE VENTA ==================== -->
+        <section id="pos" class="section active">
+            <div class="pos-container">
+                <div class="pos-products">
+                    <div class="card">
+                        <div class="form-row" style="margin-bottom:1rem">
+                            <div class="form-group">
+                                <label>Sucursal</label>
+                                <select id="posSucursal" class="form-control"></select>
+                            </div>
+                            <div class="form-group">
+                                <label>Empleado (ID)</label>
+                                <select id="posEmpleado" class="form-control"></select>
+                            </div>
+                            <div class="form-group">
+                                <label>Cliente (opcional)</label>
+                                <select id="posCliente" class="form-control">
+                                    <option value="">Publico General</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Tipo de Pedido</label>
+                                <select id="posTipo" class="form-control">
+                                    <option value="local">En Local</option>
+                                    <option value="llevar">Para Llevar</option>
+                                    <option value="domicilio">A Domicilio</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="pos-categories" id="posCategories"></div>
+                        <div class="products-grid" id="posProducts"></div>
+                    </div>
+                </div>
+                <div class="pos-cart">
+                    <div class="cart-header">
+                        <h3>Pedido Actual</h3>
+                    </div>
+                    <div class="cart-items" id="cartItems">
+                        <div class="empty-state">
+                            <p>Agrega productos al pedido</p>
+                        </div>
+                    </div>
+                    <div class="cart-footer">
+                        <div class="form-group">
+                            <label>Promocion</label>
+                            <select id="posPromocion" class="form-control">
+                                <option value="">Sin promocion</option>
+                            </select>
+                        </div>
+                        <div class="cart-total">
+                            <span>Total:</span>
+                            <span id="cartTotal">$0.00</span>
+                        </div>
+                        <div class="cart-options">
+                            <button class="btn btn-success" onclick="confirmarPedido()" style="width:100%">Confirmar Pedido</button>
+                            <button class="btn btn-secondary" onclick="limpiarCarrito()" style="width:100%">Limpiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PEDIDOS ==================== -->
+        <section id="pedidos" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Gestion de Pedidos</h2>
+                    <button class="btn btn-info btn-sm" onclick="cancelarVencidos()">Cancelar Vencidos (+24h)</button>
+                </div>
+                <div class="search-bar">
+                    <select id="pedidosSucursal" class="form-control" style="max-width:200px">
+                        <option value="">Todas las sucursales</option>
+                    </select>
+                    <input type="date" id="pedidosFechaInicio" class="form-control" style="max-width:180px">
+                    <input type="date" id="pedidosFechaFin" class="form-control" style="max-width:180px">
+                    <button class="btn btn-primary" onclick="cargarPedidos()">Buscar</button>
+                </div>
+                <div class="order-filters" id="orderFilters">
+                    <button class="status-btn active" data-status="">Todos</button>
+                    <button class="status-btn" data-status="pendiente">Pendiente</button>
+                    <button class="status-btn" data-status="preparando">Preparando</button>
+                    <button class="status-btn" data-status="listo">Listo</button>
+                    <button class="status-btn" data-status="entregado">Entregado</button>
+                    <button class="status-btn" data-status="cancelado">Cancelado</button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Sucursal</th>
+                                <th>Empleado</th>
+                                <th>Cliente</th>
+                                <th>Fecha</th>
+                                <th>Tipo</th>
+                                <th>Estatus</th>
+                                <th>Total</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pedidosTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CATALOGOS ==================== -->
+        <section id="catalogos" class="section">
+            <div class="nav" style="margin-bottom:1.5rem">
+                <button class="nav-btn active" data-catalog="sucursales">Sucursales</button>
+                <button class="nav-btn" data-catalog="categorias">Categorias</button>
+                <button class="nav-btn" data-catalog="productos">Productos</button>
+                <button class="nav-btn" data-catalog="empleados">Empleados</button>
+                <button class="nav-btn" data-catalog="clientes">Clientes</button>
+                <button class="nav-btn" data-catalog="promociones">Promociones</button>
+            </div>
+
+            <!-- Sucursales -->
+            <div id="cat-sucursales" class="catalog-panel">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Sucursales</h2>
+                        <button class="btn btn-primary btn-sm" onclick="openModal('sucursal')">+ Nueva Sucursal</button>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" id="searchSucursal" class="form-control" placeholder="Buscar sucursal..." oninput="loadSucursales()">
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead><tr><th>Nombre</th><th>Direccion</th><th>Ciudad</th><th>Telefono</th><th>Estatus</th><th>Acciones</th></tr></thead>
+                            <tbody id="sucursalesTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categorias -->
+            <div id="cat-categorias" class="catalog-panel" style="display:none">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Categorias</h2>
+                        <button class="btn btn-primary btn-sm" onclick="openModal('categoria')">+ Nueva Categoria</button>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" id="searchCategoria" class="form-control" placeholder="Buscar categoria..." oninput="loadCategorias()">
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead><tr><th>Nombre</th><th>Descripcion</th><th>Acciones</th></tr></thead>
+                            <tbody id="categoriasTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Productos -->
+            <div id="cat-productos" class="catalog-panel" style="display:none">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Productos / Menu</h2>
+                        <button class="btn btn-primary btn-sm" onclick="openModal('producto')">+ Nuevo Producto</button>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" id="searchProducto" class="form-control" placeholder="Buscar producto..." oninput="loadProductos()">
+                        <select id="filterCategoria" class="form-control" style="max-width:200px" onchange="loadProductos()">
+                            <option value="">Todas las categorias</option>
+                        </select>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead><tr><th>Nombre</th><th>Categoria</th><th>Precio</th><th>Costo</th><th>Estatus</th><th>Acciones</th></tr></thead>
+                            <tbody id="productosTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empleados -->
+            <div id="cat-empleados" class="catalog-panel" style="display:none">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Empleados</h2>
+                        <button class="btn btn-primary btn-sm" onclick="openModal('empleado')">+ Nuevo Empleado</button>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" id="searchEmpleado" class="form-control" placeholder="Buscar empleado..." oninput="loadEmpleados()">
+                        <select id="filterSucursalEmpleado" class="form-control" style="max-width:200px" onchange="loadEmpleados()">
+                            <option value="">Todas las sucursales</option>
+                        </select>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead><tr><th>Nombre</th><th>Telefono</th><th>Puesto</th><th>Sucursal</th><th>Salario</th><th>Ingreso</th><th>Estatus</th><th>Acciones</th></tr></thead>
+                            <tbody id="empleadosTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clientes -->
+            <div id="cat-clientes" class="catalog-panel" style="display:none">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Clientes Frecuentes</h2>
+                        <button class="btn btn-primary btn-sm" onclick="openModal('cliente')">+ Nuevo Cliente</button>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" id="searchCliente" class="form-control" placeholder="Buscar cliente..." oninput="loadClientes()">
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead><tr><th>Nombre</th><th>Telefono</th><th>Correo</th><th>Sucursal</th><th>Ciudad</th><th>Registro</th><th>Acciones</th></tr></thead>
+                            <tbody id="clientesTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Promociones -->
+            <div id="cat-promociones" class="catalog-panel" style="display:none">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Promociones</h2>
+                        <button class="btn btn-primary btn-sm" onclick="openModal('promocion')">+ Nueva Promocion</button>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" id="searchPromocion" class="form-control" placeholder="Buscar promocion..." oninput="loadPromociones()">
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead><tr><th>Nombre</th><th>Descuento</th><th>Inicio</th><th>Fin</th><th>Vigente</th><th>Estatus</th><th>Acciones</th></tr></thead>
+                            <tbody id="promocionesTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== DASHBOARD ==================== -->
+        <section id="dashboard" class="section">
+            <div class="card" style="margin-bottom:1.5rem">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Fecha Inicio</label>
+                        <input type="date" id="dashFechaInicio" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha Fin</label>
+                        <input type="date" id="dashFechaFin" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Sucursal</label>
+                        <select id="dashSucursal" class="form-control">
+                            <option value="">Todas</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="display:flex;align-items:flex-end">
+                        <button class="btn btn-primary" onclick="cargarDashboard()">Generar Reportes</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <h3>Total Ventas</h3>
+                    <div class="value" id="dashTotalVentas">$0</div>
+                    <div class="sub" id="dashTotalPedidos">0 pedidos</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Ticket Promedio</h3>
+                    <div class="value" id="dashTicketPromedio">$0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Sucursal Top</h3>
+                    <div class="value" id="dashSucursalTop" style="font-size:1.2rem">-</div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid" style="margin-top:1.5rem">
+                <div class="chart-container">
+                    <h3>Ventas por Sucursal</h3>
+                    <div class="bar-chart" id="chartSucursales"></div>
+                </div>
+                <div class="chart-container">
+                    <h3>Ventas por Categoria</h3>
+                    <div class="bar-chart" id="chartCategorias"></div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid" style="margin-top:1.5rem">
+                <div class="card">
+                    <h3 style="margin-bottom:1rem;color:var(--primary)">Top 10 Productos Mas Vendidos</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead><tr><th>#</th><th>Producto</th><th>Categoria</th><th>Cantidad</th><th>Total</th></tr></thead>
+                            <tbody id="dashTopProductos"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 style="margin-bottom:1rem;color:var(--primary)">Rendimiento Empleados (>5 pedidos)</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead><tr><th>Empleado</th><th>Puesto</th><th>Sucursal</th><th>Pedidos</th><th>Ventas</th><th>Ticket Prom.</th></tr></thead>
+                            <tbody id="dashEmpleados"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top:1.5rem">
+                <h3 style="margin-bottom:1rem;color:var(--primary)">Productos Sin Movimiento</h3>
+                <div class="table-container">
+                    <table>
+                        <thead><tr><th>Producto</th><th>Categoria</th></tr></thead>
+                        <tbody id="dashSinMovimiento"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top:1.5rem">
+                <h3 style="margin-bottom:1rem;color:var(--primary)">Comparativo Mensual</h3>
+                <div class="table-container">
+                    <table>
+                        <thead><tr><th>Año</th><th>Mes</th><th>Sucursal</th><th>Pedidos</th><th>Total Ventas</th></tr></thead>
+                        <tbody id="dashComparativo"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== MODALS ==================== -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Modal</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modalBody"></div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+                <button class="btn btn-primary" id="modalSave">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Detail Modal -->
+    <div class="modal-overlay" id="orderDetailOverlay">
+        <div class="modal" style="max-width:700px">
+            <div class="modal-header">
+                <h3>Detalle del Pedido</h3>
+                <button class="modal-close" onclick="document.getElementById('orderDetailOverlay').classList.remove('active')">&times;</button>
+            </div>
+            <div id="orderDetailBody"></div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
