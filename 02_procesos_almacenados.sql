@@ -1031,3 +1031,20 @@ BEGIN
     ORDER BY c.Nombre, pr.Nombre;
 END
 GO
+
+
+CREATE OR ALTER PROCEDURE sp_Login
+    @Username NVARCHAR(50),
+    @Password NVARCHAR(255)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT u.Id AS id, u.Username AS username, u.Rol AS rol, u.EmpleadoId AS empleadoId,
+           e.Nombre AS empleadoNombre, e.SucursalId AS sucursalId, s.Nombre AS sucursalNombre,
+           u.Estatus AS estatus
+    FROM Usuarios u
+    INNER JOIN Empleados e ON u.EmpleadoId = e.Id
+    INNER JOIN Sucursales s ON e.SucursalId = s.Id
+    WHERE u.Username = @Username AND u.PasswordHash = @Password;
+END
+GO
