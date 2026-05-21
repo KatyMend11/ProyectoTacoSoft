@@ -6,7 +6,7 @@ let allEmpleados = [];
 let allClientes = [];
 let allPromociones = [];
 
-// ==================== UTILS ====================
+
 function formatMoney(n) {
     return '$' + Number(n).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
@@ -31,7 +31,6 @@ function showToast(msg, type = 'success') {
     setTimeout(() => toast.remove(), 3000);
 }
 
-// ==================== NAVIGATION ====================
 document.querySelectorAll('.nav-btn[data-section]').forEach(btn => {
     btn.addEventListener('click', () => {
         document.querySelectorAll('.nav-btn[data-section]').forEach(b => b.classList.remove('active'));
@@ -60,7 +59,6 @@ document.querySelectorAll('#orderFilters .status-btn').forEach(btn => {
     });
 });
 
-// ==================== POPULATE SELECTS ====================
 function populateSucursalSelects() {
     const selects = ['posSucursal', 'pedidosSucursal', 'dashSucursal', 'filterSucursalEmpleado'];
     selects.forEach(id => {
@@ -111,7 +109,7 @@ function setDefaultDates() {
     document.getElementById('dashFechaFin').value = today.toISOString().split('T')[0];
 }
 
-// ==================== SUCURSALES ====================
+
 async function loadSucursales() {
     const busqueda = document.getElementById('searchSucursal')?.value || '';
     const data = await apiGet(`/sucursales?busqueda=${busqueda}`);
@@ -315,7 +313,6 @@ async function bajaCategoria(id) {
     showToast('Categoria eliminada');
 }
 
-// ==================== PRODUCTOS ====================
 let allProductos = [];
 
 async function loadProductos() {
@@ -427,7 +424,6 @@ async function bajaEmpleado(id) {
     showToast('Empleado dado de baja');
 }
 
-// ==================== CLIENTES ====================
 async function loadClientes() {
     const busqueda = document.getElementById('searchCliente')?.value || '';
     const data = await apiGet(`/clientes?busqueda=${busqueda}`);
@@ -479,7 +475,6 @@ async function bajaCliente(id) {
     showToast('Cliente dado de baja');
 }
 
-// ==================== PROMOCIONES ====================
 async function loadPromociones() {
     const busqueda = document.getElementById('searchPromocion')?.value || '';
     const data = await apiGet(`/promociones?busqueda=${busqueda}`);
@@ -558,7 +553,6 @@ async function reactivarPromocion(id) {
     }
 }
 
-// ==================== PUNTO DE VENTA ====================
 document.getElementById('posSucursal').addEventListener('change', () => {
     populateEmpleadoSelect();
     populateClienteSelect();
@@ -751,7 +745,6 @@ async function confirmarPedido() {
     }
 }
 
-// ==================== PEDIDOS ====================
 async function cargarPedidos() {
     const estatus = document.querySelector('#orderFilters .status-btn.active')?.dataset.status || '';
     const sucursalId = document.getElementById('pedidosSucursal').value;
@@ -867,7 +860,6 @@ async function verPedido(pedidoId) {
     document.getElementById('orderDetailOverlay').classList.add('active');
 }
 
-// ==================== DASHBOARD ====================
 async function cargarDashboard() {
     const fechaInicio = document.getElementById('dashFechaInicio').value;
     const fechaFin = document.getElementById('dashFechaFin').value;
@@ -955,7 +947,6 @@ function renderBarChart(containerId, data) {
     `).join('');
 }
 
-// ==================== INIT ====================
 async function init() {
     await loadSucursales();
     await loadCategorias();
